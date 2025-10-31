@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SistemaGestion implements IAuditable, IAgendable {
+public class Empresa implements IAuditable, IAgendable {
 
     private String nombre;
     private String nit;
@@ -13,9 +13,9 @@ public class SistemaGestion implements IAuditable, IAgendable {
     private List<Servicio> servicios;
     private List<Equipo> equipos;
     private List<RegistroNovedad> novedades;
-    private List<Agenda> agendas;
+    private List<AgendaItem> agendas;
 
-    public SistemaGestion(String nombre, String nit) {
+    public Empresa(String nombre, String nit) {
         this.nombre = nombre;
         this.nit = nit;
         this.empleados = new ArrayList<>();
@@ -36,7 +36,7 @@ public class SistemaGestion implements IAuditable, IAgendable {
     public List<Servicio> getServicio() { return servicios; }
     public List<Equipo> getEquipo() { return equipos; }
     public List<RegistroNovedad> getNovedades() { return novedades; }
-    public List<Agenda> getAgendas() { return agendas; }
+    public List<AgendaItem> getAgendas() { return agendas; }
 
     public void agregarEmpleado(Empleado empleado) {
         empleados.add(empleado);
@@ -168,15 +168,15 @@ public class SistemaGestion implements IAuditable, IAgendable {
 
     @Override
     public void programarFechaHora(LocalDate fecha, String descripcion) {
-        Agenda nueva = new Agenda(fecha, descripcion);
+        AgendaItem nueva = new AgendaItem(fecha, descripcion);
         agendas.add(nueva);
         System.out.println(" Agenda creada para el " + fecha + " - " + descripcion);
     }
 
     @Override
-    public ArrayList<Agenda> obtnerAgendaDesde(LocalDate fecha) {
-        ArrayList<Agenda> lista = new ArrayList<>();
-        for (Agenda a : agendas) {
+    public ArrayList<AgendaItem> obtnerAgendaDesde(LocalDate fecha) {
+        ArrayList<AgendaItem> lista = new ArrayList<>();
+        for (AgendaItem a : agendas) {
             if (!a.getFecha().isBefore(fecha)) {
                 lista.add(a);
             }
